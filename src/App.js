@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import Data from './Data'
+import { useEffect, useState } from 'react';
+import SpellList from './Components/SpellList'
 
 function App() {
+
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    // axios.get('https://sheet.best/api/sheets/ee85efea-0617-4f18-86e5-8d77192ce78c')
+    // .then(res => {
+    //   console.log(res)
+    //   setData(res.data)
+    // })
+    setData(Data)
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      < SpellList spells={data} />
     </div>
   );
 }
