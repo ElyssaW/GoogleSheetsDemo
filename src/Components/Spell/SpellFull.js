@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import SpellHeader from './SpellComponents/SpellHeader'
 import SpellBody from './SpellComponents/SpellBody'
 

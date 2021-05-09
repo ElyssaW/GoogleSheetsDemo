@@ -1,7 +1,7 @@
 import SpellFull from './SpellFull'
 import SpellSlim from './SpellSlim'
 import SpellTrait from './SpellComponents/SpellTrait'
-import Toggle from './Toggle'
+import Toggle from '../Toggle'
 
 function SpellList(props) {
 
