@@ -1,7 +1,7 @@
 function Checkbox(props) {
     return (
         <>
-            < input name={props.name} htmlFor={props.label} value={props.value} type='checkbox' />
+            < input name={props.name} htmlFor={props.label} value={props.value} type='checkbox' onClick={props.handleClick} />
             < label >{props.label}</label>
         </>
     );
