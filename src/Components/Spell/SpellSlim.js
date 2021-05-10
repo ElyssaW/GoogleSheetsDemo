@@ -3,9 +3,9 @@ import SpellHeader from './SpellComponents/SpellHeader'
 function SpellSlim(props) {
 
   return (
-    <div>
+    <span>
         < SpellHeader spell={props.spell} />
-    </div>
+    </span>
   );
 }
 

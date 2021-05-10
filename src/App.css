@@ -11,3 +11,7 @@ button {
 .breadcrumb-active {
     background-color: tomato;
 }
+
+h2{
+    display: inline;
+}

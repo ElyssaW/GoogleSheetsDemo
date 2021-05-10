@@ -1,22 +1,11 @@
-function SpellTrait(props) {
-
-    const display = props.name ? (
-        <span>
-            {props.name}: {props.trait}
-        </span>
-    ) : (
-        <span>
-            {props.trait}
-        </span>
-    ) 
-
-
+function Checkbox(props) {
     return (
-      <span>
-          {display}
-      </span>
+        <>
+            < input name={props.name} htmlFor={props.label} value={props.value} type='checkbox' />
+            < label >{props.label}</label>
+        </>
     );
   }
   
-  export default SpellTrait;
+  export default Checkbox;
   

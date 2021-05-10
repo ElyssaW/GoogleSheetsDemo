@@ -7,6 +7,8 @@ import { Box, CssBaseline } from '@material-ui/core';
 
 import Pagination from './Components/Pagination'
 import SlimSearch from './Search/SlimSearch'
+import AdvancedSearch from './Search/AdvancedSearch'
+import Toggle from './Components/Toggle'
 
 function App() {
 
@@ -40,7 +42,12 @@ function App() {
       < CssBaseline />
       <div className="App">
         <h1>Pathfinder Spell Search</h1>
-        < SlimSearch updateSearch={updateSearch} />
+
+        < Toggle 
+          open={< AdvancedSearch updateSearch={updateSearch} />}
+          closed={< SlimSearch updateSearch={updateSearch} />}
+        />
+        
         < Pagination spells={filterSearch()} />
       </div>
     </>
