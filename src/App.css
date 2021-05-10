@@ -1,1 +1,13 @@
+.App {
+    padding: 5%;
+}
 
+button {
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+}
+
+.breadcrumb-active {
+    background-color: tomato;
+}

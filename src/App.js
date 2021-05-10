@@ -5,16 +5,15 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import { Box, CssBaseline } from '@material-ui/core';
 
-import SpellList from './Components/Spell/SpellList'
+import Pagination from './Components/Pagination'
 import SlimSearch from './Search/SlimSearch'
 
 function App() {
 
-  const [data, setData] = useState(null)
-  const [search, setSearch] = useState('')
-  const [page, setPage] = useState(0)
-  const [pageLimit, setPageLimit] = useState(10)
+  const [data, setData] = useState(null)    // Spell Data
+  const [search, setSearch] = useState('')  // Search Term
 
+  // Fetches data and sets it in state
   useEffect(() => {
     // axios.get('https://sheet.best/api/sheets/ee85efea-0617-4f18-86e5-8d77192ce78c')
     // .then(res => {
@@ -24,33 +23,26 @@ function App() {
     setData(Data)
   }, [])
 
+  // Updates search term
   const updateSearch = (e) => {
     setSearch(e.target.value)
   }
 
+  // Filters Spell Data by current search term and returns filtered array
   const filterSearch = () => {
-    if (data) {
-      if (data[page + pageLimit]) {
-        return data.slice(page, page + pageLimit).filter(spell => {
-          return spell.description.includes(search) || spell.name.includes(search)
-        })
-      } else {
-        return data.slice(page).filter(spell => {
-          return spell.description.includes(search) || spell.name.includes(search)
-        })
-      }
-    } else {
-      return []
-    }
+    return data ? data.filter(spell => {
+      return spell.name.includes(search)
+    }) : []
   }
 
   return (
     <>
       < CssBaseline />
-      <Box className="App">
+      <div className="App">
+        <h1>Pathfinder Spell Search</h1>
         < SlimSearch updateSearch={updateSearch} />
-        < SpellList spells={filterSearch()} />
-      </Box>
+        < Pagination spells={filterSearch()} />
+      </div>
     </>
   );
 }

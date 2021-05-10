@@ -5,7 +5,7 @@ function SpellTrait(props) {
 
     const display = name ? (
         <span>
-            {name}: {trait}
+            <b>{name}:</b> {trait}
         </span>
     ) : (
         <span>
