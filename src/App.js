@@ -44,7 +44,7 @@ function App() {
         <h1>Pathfinder Spell Search</h1>
 
         < Toggle 
-          open={< AdvancedSearch updateSearch={updateSearch} />}
+          open={< AdvancedSearch updateSearch={updateSearch} setSpells={setData} spells={data} />}
           closed={< SlimSearch updateSearch={updateSearch} />}
         />
         

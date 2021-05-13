@@ -1,6 +1,6 @@
-import Checkbox from './Checkbox'
+import Radio from './Radio'
 
-function CheckboxBank(props) {
+function RadioBank(props) {
 
     const bank = props.boxes.map(box => {
         return (
@@ -19,5 +19,5 @@ function CheckboxBank(props) {
     );
   }
   
-  export default CheckboxBank;
+  export default RadioBank;
   

@@ -1,6 +1,5 @@
 import SearchBar from './SearchComponents/SearchBar'
-import Checkbox from './SearchComponents/Checkbox'
-import CheckboxBank from './SearchComponents/CheckboxBank'
+import SearchOptions from './SearchComponents/SearchOptions'
 import Button from '../Components/Button'
 import { useState } from 'react';
 
@@ -14,23 +13,30 @@ function AdvancedSearch(props) {
     setSearch(e.target.value)
   }
 
-  const updateInclude = (value) => {
+  const updateInclude = (key, value) => {
+    console.log(key, value)
     const newInclude = include
 
-    if (newInclude[value]) {
-      newInclude[value] = !newInclude[value]
+    if (newInclude[key] && newInclude[key].includes(value)) {
+      newInclude[key] = newInclude[key].filter(item => {
+        return item != value
+      })
+
+    } else if (newInclude[key]) {
+      newInclude[key].push(value)
+
     } else {
-      newInclude[value] = true
+      newInclude[key] = [value]
     }
 
     setInclude({...newInclude})
   }
 
-  const updateExclude = (value) => {
+  const updateExclude = (key, value) => {
     const newExclude = exclude
 
     if (newExclude[value]) {
-      newExclude[value] = !newExclude[value]
+      delete newExclude[value]
     } else {
       newExclude[value] = true
     }
@@ -38,414 +44,95 @@ function AdvancedSearch(props) {
     setExclude({...newExclude})
   }
 
-  const submitSearch = () => {
+  const checkOneColumn = (spell, include, key) => {
+    let regex = new RegExp(`(${include[key].join('|')})`, 'i')
+
+    // Return false if the regex can't find a match
+    if (!spell[key] || !spell[key].match(regex)) {
+      return false
+    }
+
+    return true
+  }
+
+  // For checking data such as effect or components, which is stored across multiple columns
+  const checkMultiColumn = (spell, include, key) => {
+
+    for (let i = 0; i < include[key].length; i++) {
+      if (!spell[include[key]]) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  // For checking data such as ray-spells, which is not always easily accessible
+  const checkSpecial = (spell, phrase, column) => {
+    let regex = new RegExp(`${phrase}`, 'i')
+    if (!spell[column].match(regex)) {
+      return false
+    }
+    return true
+  }
+
+  const advancedSearch = () => {
     console.log('Submitting search')
-    console.log(include, exclude, search)
+    console.log(include)
+
+    const filteredSpells = props.spells.filter(spell => {
+
+      // Check all conditions for including spells
+      for (const key in include) {
+
+        if (['components', 'effects'].includes(key)) {
+          return checkMultiColumn(spell, include, key)
+          
+        } else if (key === 'area' && include[key][0] == 'ray') {
+          return checkSpecial(spell, 'effect', 'ray')
+
+        } else if (key === 'area' && ['ranged touch attack', 'melee touch attack'].includes(include[key][0])) {
+          return checkSpecial(spell, include[key][0], 'description')
+
+        } else {
+          return checkOneColumn(spell, include, key)
+        }
+      }
+
+      // Check all conditions for excluding spells
+      for (const key in exclude) {
+
+        // Create regex that will match the keywords we're looking for
+        let regex = new RegExp(`(${include[key].join('|')})`, 'i')
+
+        // Return false if the spell contains any of the keywords we want to exclude
+        if (spell[key] && spell[key].match(regex)) {
+          return false
+        }
+      }
+
+      // If the spell has any of the inclusive keywords, and none of the exclusive ones, then return true
+      return true
+    })
+
+    console.log(filteredSpells)
+    props.setSpells(filteredSpells)
   }
 
   return (
     <div>
         < SearchBar updateSearch={updateSearch} />
-        < Button handleClick={submitSearch} text='Search' />
-
-        {/* Spell Resistence, Saving Throw, Duration, Targets, Range, Casting Time, School, Domain, Source */}
+        < Button handleClick={advancedSearch} text='Search' />
 
         <div className='row'>
-          <div className='checkbox-group'>
+          <div>
             <h3>Include: </h3>
-
-            <CheckboxBank 
-              title='Components'
-              name='components'
-              handleClick={(e)=>{updateInclude(e.target.value)}}
-              boxes = {[
-                {
-                  label: 'Verbal',
-                  value: 'verbal'
-                }, {
-                  label: 'Somantic',
-                  value: 'somantic'
-                }, {
-                  label: 'Material',
-                  value: 'material'
-                }, {
-                  label: 'Focus',
-                  value: 'focus'
-                }, {
-                  label: 'Divine Focus',
-                  value: 'divinefocus'
-                }, {
-                  label: 'Material Costs',
-                  value: 'materialcosts'
-                },
-              ]}
-            />
-
-            <CheckboxBank 
-              title='Effects'
-              name='effects'
-              handleClick={(e)=>{updateInclude(e.target.value)}}
-              boxes = {[
-                {
-                  label: 'Water',
-                  value: 'water'
-                }, {
-                  label: 'Sonic',
-                  value: 'sonic'
-                }, {
-                  label: 'Shadow',
-                  value: 'shadow'
-                }, {
-                  label: 'Poison',
-                  value: 'poison'
-                }, {
-                  label: 'Pain',
-                  value: 'pain'
-                }, {
-                  label: 'Mind Affecting',
-                  value: 'mindaffecting'
-                }, {
-                  label: 'Light',
-                  value: 'light'
-                }, {
-                  label: 'Lawful',
-                  value: 'lawful'
-                }, {
-                  label: 'Language Dependent',
-                  value: 'languagedependent'
-                }, {
-                  label: 'Good',
-                  value: 'good'
-                }, {
-                  label: 'Force',
-                  value: 'force'
-                }, {
-                  label: 'Fire',
-                  value: 'fire'
-                }, {
-                  label: 'Fear',
-                  value: 'fear'
-                }, {
-                  label: 'Evil',
-                  value: 'evil'
-                }, {
-                  label: 'Emotion',
-                  value: 'emotion'
-                }, {
-                  label: 'Electricity',
-                  value: 'electricity'
-                }, {
-                  label: 'Earth',
-                  value: 'earth'
-                }, {
-                  label: 'Disease',
-                  value: 'disease'
-                }, {
-                  label: 'Death',
-                  value: 'death'
-                }, {
-                  label: 'Darkness',
-                  value: 'Darkness'
-                }, {
-                  label: 'Curse',
-                  value: 'curse'
-                }, {
-                  label: 'Cold',
-                  value: 'cold'
-                }, {
-                  label: 'Chaotic',
-                  value: 'chaotic'
-                }, {
-                  label: 'Air',
-                  value: 'air'
-                }, {
-                  label: 'Acid',
-                  value: 'acid'
-                },
-              ]}
-            />
-
-            <CheckboxBank 
-              title='Class'
-              name='class'
-              handleClick={(e)=>{updateInclude(e.target.value)}}
-              boxes = {[
-                {
-                  label: 'Wizard',
-                  value: 'wiz'
-                }, {
-                  label: 'Sorcerer',
-                  value: 'sor'
-                }, {
-                  label: 'Cleric',
-                  value: 'cleric'
-                }, {
-                  label: 'Druid',
-                  value: 'druid'
-                }, {
-                  label: 'Ranger',
-                  value: 'ranger'
-                }, {
-                  label: 'Bard',
-                  value: 'bard'
-                }, {
-                  label: 'Paladin',
-                  value: 'paladin'
-                }, {
-                  label: 'Alchemist',
-                  value: 'alchemist'
-                }, {
-                  label: 'Summoner',
-                  value: 'summoner'
-                }, {
-                  label: 'Unchained Summoner',
-                  value: 'summonerunchained'
-                }, {
-                  label: 'Inquisitor',
-                  value: 'inquisitor'
-                }, {
-                  label: 'Oracle',
-                  value: 'oracle'
-                }, {
-                  label: 'Antipaladin',
-                  value: 'antipaladin'
-                }, {
-                  label: 'Magus',
-                  value: 'magus'
-                }, {
-                  label: 'Bloodrager',
-                  value: 'bloodrager'
-                }, {
-                  label: 'Shaman',
-                  value: 'shaman'
-                }, {
-                  label: 'Psychic',
-                  value: 'psychic'
-                }, {
-                  label: 'Medium',
-                  value: 'medium'
-                }, {
-                  label: 'Mesmerist',
-                  value: 'mesmerist'
-                }, {
-                  label: 'Occultist',
-                  value: 'occultist'
-                }, {
-                  label: 'Spiritualist',
-                  value: 'spiritualist'
-                }, {
-                  label: 'Skald',
-                  value: 'skald'
-                }, {
-                  label: 'Investigator',
-                  value: 'investigator'
-                }, {
-                  label: 'Hunter',
-                  value: 'hunter'
-                }, {
-                  label: 'Witch',
-                  value: 'witch'
-                }
-              ]}
-            />
+            <SearchOptions handleClick={(e)=>{updateInclude(e.target.name, e.target.value)}} />
           </div>
 
-          <div className='checkbox-group'>
+          <div>
             <h3>Exclude: </h3>
-            <CheckboxBank 
-                title='Components'
-                name='components'
-                handleClick={(e)=>{updateExclude(e.target.value)}}
-                boxes = {[
-                  {
-                    label: 'Verbal',
-                    value: 'verbal'
-                  }, {
-                    label: 'Somantic',
-                    value: 'somantic'
-                  }, {
-                    label: 'Material',
-                    value: 'material'
-                  }, {
-                    label: 'Focus',
-                    value: 'focus'
-                  }, {
-                    label: 'Divine Focus',
-                    value: 'divinefocus'
-                  }, {
-                    label: 'Material Costs',
-                    value: 'materialcosts'
-                  },
-                ]}
-            />
-
-            <CheckboxBank 
-                title='Effects'
-                name='effects'
-                handleClick={(e)=>{updateExclude(e.target.value)}}
-                boxes = {[
-                  {
-                    label: 'Water',
-                    value: 'water'
-                  }, {
-                    label: 'Sonic',
-                    value: 'sonic'
-                  }, {
-                    label: 'Shadow',
-                    value: 'shadow'
-                  }, {
-                    label: 'Poison',
-                    value: 'poison'
-                  }, {
-                    label: 'Pain',
-                    value: 'pain'
-                  }, {
-                    label: 'Mind Affecting',
-                    value: 'mindaffecting'
-                  }, {
-                    label: 'Light',
-                    value: 'light'
-                  }, {
-                    label: 'Lawful',
-                    value: 'lawful'
-                  }, {
-                    label: 'Language Dependent',
-                    value: 'languagedependent'
-                  }, {
-                    label: 'Good',
-                    value: 'good'
-                  }, {
-                    label: 'Force',
-                    value: 'force'
-                  }, {
-                    label: 'Fire',
-                    value: 'fire'
-                  }, {
-                    label: 'Fear',
-                    value: 'fear'
-                  }, {
-                    label: 'Evil',
-                    value: 'evil'
-                  }, {
-                    label: 'Emotion',
-                    value: 'emotion'
-                  }, {
-                    label: 'Electricity',
-                    value: 'electricity'
-                  }, {
-                    label: 'Earth',
-                    value: 'earth'
-                  }, {
-                    label: 'Disease',
-                    value: 'disease'
-                  }, {
-                    label: 'Death',
-                    value: 'death'
-                  }, {
-                    label: 'Darkness',
-                    value: 'Darkness'
-                  }, {
-                    label: 'Curse',
-                    value: 'curse'
-                  }, {
-                    label: 'Cold',
-                    value: 'cold'
-                  }, {
-                    label: 'Chaotic',
-                    value: 'chaotic'
-                  }, {
-                    label: 'Air',
-                    value: 'air'
-                  }, {
-                    label: 'Acid',
-                    value: 'acid'
-                  },
-                ]}
-            />
-
-            <CheckboxBank 
-                title='Class'
-                name='class'
-                handleClick={(e)=>{updateExclude(e.target.value)}}
-                boxes = {[
-                  {
-                    label: 'Wizard',
-                    value: 'wiz'
-                  }, {
-                    label: 'Sorcerer',
-                    value: 'sor'
-                  }, {
-                    label: 'Cleric',
-                    value: 'cleric'
-                  }, {
-                    label: 'Druid',
-                    value: 'druid'
-                  }, {
-                    label: 'Ranger',
-                    value: 'ranger'
-                  }, {
-                    label: 'Bard',
-                    value: 'bard'
-                  }, {
-                    label: 'Paladin',
-                    value: 'paladin'
-                  }, {
-                    label: 'Alchemist',
-                    value: 'alchemist'
-                  }, {
-                    label: 'Summoner',
-                    value: 'summoner'
-                  }, {
-                    label: 'Unchained Summoner',
-                    value: 'summonerunchained'
-                  }, {
-                    label: 'Inquisitor',
-                    value: 'inquisitor'
-                  }, {
-                    label: 'Oracle',
-                    value: 'oracle'
-                  }, {
-                    label: 'Antipaladin',
-                    value: 'antipaladin'
-                  }, {
-                    label: 'Magus',
-                    value: 'magus'
-                  }, {
-                    label: 'Bloodrager',
-                    value: 'bloodrager'
-                  }, {
-                    label: 'Shaman',
-                    value: 'shaman'
-                  }, {
-                    label: 'Psychic',
-                    value: 'psychic'
-                  }, {
-                    label: 'Medium',
-                    value: 'medium'
-                  }, {
-                    label: 'Mesmerist',
-                    value: 'mesmerist'
-                  }, {
-                    label: 'Occultist',
-                    value: 'occultist'
-                  }, {
-                    label: 'Spiritualist',
-                    value: 'spiritualist'
-                  }, {
-                    label: 'Skald',
-                    value: 'skald'
-                  }, {
-                    label: 'Investigator',
-                    value: 'investigator'
-                  }, {
-                    label: 'Hunter',
-                    value: 'hunter'
-                  }, {
-                    label: 'Witch',
-                    value: 'witch'
-                  }
-                ]}
-            />
+            <SearchOptions handleClick={(e)=>{updateExclude(e.target.value)}} />
           </div>
         </div>
     </div>
