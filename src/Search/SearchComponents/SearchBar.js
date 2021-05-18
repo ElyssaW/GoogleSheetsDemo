@@ -1,6 +1,11 @@
+import { TextField, Typography } from '@material-ui/core'
+
 function SearchBar(props) {
     return (
-      <input type='text' onChange={(e)=>{props.updateSearch(e)}} />
+      <>
+      <Typography variant='h5'>Search By Spell Name</Typography>
+      <TextField fullWidth={true} variant='filled' onChange={(e)=>{props.updateSearch(e)}} placeholder='Search for...' />
+      </>
     );
   }
   

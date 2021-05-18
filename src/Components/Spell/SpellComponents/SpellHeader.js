@@ -1,9 +1,11 @@
+import { Typography } from '@material-ui/core'
+
 function SpellHeader(props) {
 
     return (
-      <h2>
+      <Typography variant='h4'>
           {props.spell.name}
-      </h2>
+      </Typography>
     );
   }
   

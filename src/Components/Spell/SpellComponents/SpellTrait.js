@@ -1,23 +1,25 @@
+import { Typography } from '@material-ui/core'
+
 function SpellTrait(props) {
 
     const name = props.name
     const trait = props.trait ? props.trait : props.displayIfEmpty
 
     const display = name ? (
-        <span>
+        <Typography variant='body1'>
             <b>{name}:</b> {trait}
-        </span>
+        </Typography>
     ) : (
-        <span>
+        <Typography variant='subtitle1'>
             {trait}
-        </span>
+        </Typography>
     ) 
 
 
     return (
-      <span>
+      <>
           {display}
-      </span>
+      </>
     );
   }
   

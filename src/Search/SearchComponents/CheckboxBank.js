@@ -1,19 +1,20 @@
 import Checkbox from './Checkbox'
+import { Typography } from '@material-ui/core'
 
 function CheckboxBank(props) {
 
     const bank = props.boxes.map(box => {
         return (
-            <>
-                < input name={props.name} htmlFor={box.label} value={box.value} type='radio' onClick={props.handleClick} />
-                < label >{box.label}</label>
-            </>
+            <span className='radio-btn'>
+                < input className='radio-btn-btn' name={props.name} htmlFor={box.label} data-key={box.key} data-value={box.value} type='radio' onClick={props.handleClick} />
+                < label className='radio-btn-label' >{box.label}</label>
+            </span>
         )
     })
 
     return (
         <div>
-            <h4>{props.title}</h4>
+            <Typography variant='h6' gutterBottom={true}>{props.title}</Typography>
             {bank}
         </div>
     );

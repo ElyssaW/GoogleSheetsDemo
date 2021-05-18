@@ -13,18 +13,23 @@ function SearchOptions(props) {
               boxes = {[
                 {
                   label: 'None',
+                  key: 'savingthrow',
                   value: 'None'
                 }, {
                   label: 'Will',
+                  key: 'savingthrow',
                   value: 'will'
                 }, {
                   label: 'Reflex',
+                  key: 'savingthrow',
                   value: 'Reflex'
                 }, {
                   label: 'Fortitude',
+                  key: 'savingthrow',
                   value: 'Fortitude'
                 }, {
                   label: 'Other',
+                  key: 'savingthrow',
                   value: ''
                 }
               ]}
@@ -36,31 +41,40 @@ function SearchOptions(props) {
               handleClick={props.handleClick}
               boxes = {[
                 {
-                  label: 'Instantenous',
-                  value: 'instantenous'
+                  label: 'Instantaneous',
+                  key: 'duration',
+                  value: 'instantaneous'
                 }, {
-                  label: 'Permenant',
-                  value: 'permenant'
+                  label: 'Permanent',
+                  key: 'duration',
+                  value: 'permanent'
                 }, {
                   label: 'Concentration',
+                  key: 'duration',
                   value: 'concentration'
                 }, {
-                  label: '1 roud/level',
+                  label: '1 round/level',
+                  key: 'duration',
                   value: 'round'
                 }, {
                   label: '1 minute/level',
+                  key: 'duration',
                   value: '1 minute'
                 }, {
                   label: '10 minutes/level',
+                  key: 'duration',
                   value: '10 minutes'
                 }, {
                   label: '1 hour/level',
+                  key: 'duration',
                   value: 'hour'
                 }, {
                   label: '1 day/level',
+                  key: 'duration',
                   value: 'day'
                 }, {
                   label: 'Other',
+                  key: 'duration',
                   value: ''
                 }
               ]}
@@ -73,27 +87,35 @@ function SearchOptions(props) {
               boxes = {[
                 {
                   label: 'Radius',
+                  key: 'area',
                   value: 'radius'
                 }, {
                   label: 'Cone',
+                  key: 'area',
                   value: 'cone'
                 }, {
                   label: 'Line',
+                  key: 'area',
                   value: 'line'
                 }, {
                   label: 'Ray',
+                  key: 'effect',
                   value: 'ray'
                 }, {
                   label: 'Melee Touch Attack',
+                  key: 'description',
                   value: 'melee touch attack'
                 }, {
                   label: 'Ranged Touch Attack',
+                  key: 'description',
                   value: 'ranged'
                 }, {
                   label: 'Other',
+                  key: 'area',
                   value: ''
                 }, {
                   label: 'None',
+                  key: 'area',
                   value: 'none'
                 }
               ]}
@@ -106,21 +128,27 @@ function SearchOptions(props) {
               boxes = {[
                 {
                   label: 'Long',
+                  key: 'range',
                   value: 'long'
                 }, {
                   label: 'Medium',
+                  key: 'range',
                   value: 'medium'
                 }, {
                   label: 'Close',
+                  key: 'range',
                   value: 'close'
                 }, {
                   label: 'Touch',
+                  key: 'range',
                   value: 'touch'
                 }, {
                   label: 'Personal',
+                  key: 'range',
                   value: 'Personal'
                 }, {
                   label: 'Other',
+                  key: 'range',
                   value: ''
                 }
               ]}
@@ -133,27 +161,35 @@ function SearchOptions(props) {
               boxes = {[
                 {
                   label: 'Abjuration',
+                  key: 'school',
                   value: 'abjuration'
                 }, {
                   label: 'Conjuration',
+                  key: 'school',
                   value: 'conjuration'
                 },, {
                   label: 'Divination',
+                  key: 'school',
                   value: 'divination'
                 }, {
                   label: 'Evocation',
+                  key: 'school',
                   value: 'evocation'
                 }, {
                   label: 'Enchantment',
+                  key: 'school',
                   value: 'enchantment'
                 }, {
                   label: 'Illusion',
+                  key: 'school',
                   value: 'illusion'
                 }, {
                   label: 'Necromancy',
+                  key: 'school',
                   value: 'necromancy'
                 }, {
                   label: 'Transmutation',
+                  key: 'school',
                   value: 'transmutation'
                 }
               ]}
@@ -166,22 +202,28 @@ function SearchOptions(props) {
               boxes = {[
                 {
                   label: 'Verbal',
-                  value: 'verbal'
+                  key: 'verbal',
+                  value: '1'
                 }, {
                   label: 'Somatic',
-                  value: 'somatic'
+                  key: 'somantic',
+                  value: '1'
                 }, {
                   label: 'Material',
-                  value: 'material'
+                  key: 'material',
+                  value: '1'
                 }, {
                   label: 'Focus',
-                  value: 'focus'
+                  key: 'focus',
+                  value: '1'
                 }, {
                   label: 'Divine Focus',
-                  value: 'divinefocus'
+                  key: 'divinefocus',
+                  value: '1'
                 }, {
                   label: 'Material Costs',
-                  value: 'materialcosts'
+                  key: 'materialcosts',
+                  value: '1'
                 },
               ]}
             />
@@ -193,163 +235,213 @@ function SearchOptions(props) {
               boxes = {[
                 {
                   label: 'Water',
-                  value: 'water'
+                  key: 'water',
+                  value: '1'
                 }, {
                   label: 'Sonic',
-                  value: 'sonic'
+                  key: 'sonic',
+                  value: '1'
                 }, {
                   label: 'Shadow',
-                  value: 'shadow'
+                  key: 'shadow',
+                  value: '1'
                 }, {
                   label: 'Poison',
-                  value: 'poison'
+                  key: 'poison',
+                  value: '1'
                 }, {
                   label: 'Pain',
-                  value: 'pain'
+                  key: 'pain',
+                  value: '1'
                 }, {
                   label: 'Mind Affecting',
-                  value: 'mindaffecting'
+                  key: 'mindaffecting',
+                  value: '1'
                 }, {
                   label: 'Light',
-                  value: 'light'
+                  key: 'light',
+                  value: '1'
                 }, {
                   label: 'Lawful',
-                  value: 'lawful'
+                  key: 'lawful',
+                  value: '1'
                 }, {
                   label: 'Language Dependent',
-                  value: 'languagedependent'
+                  key: 'languagedependent',
+                  value: '1'
                 }, {
                   label: 'Good',
-                  value: 'good'
+                  key: 'good',
+                  value: '1'
                 }, {
                   label: 'Force',
-                  value: 'force'
+                  key: 'force',
+                  value: '1'
                 }, {
                   label: 'Fire',
-                  value: 'fire'
+                  key: 'fire',
+                  value: '1'
                 }, {
                   label: 'Fear',
-                  value: 'fear'
+                  key: 'fear',
+                  value: '1'
                 }, {
                   label: 'Evil',
-                  value: 'evil'
+                  key: 'evil',
+                  value: '1'
                 }, {
                   label: 'Emotion',
-                  value: 'emotion'
+                  key: 'emotion',
+                  value: '1'
                 }, {
                   label: 'Electricity',
-                  value: 'electricity'
+                  key: 'electricity',
+                  value: '1'
                 }, {
                   label: 'Earth',
-                  value: 'earth'
+                  key: 'earth',
+                  value: '1'
                 }, {
                   label: 'Disease',
-                  value: 'disease'
+                  key: 'disease',
+                  value: '1'
                 }, {
                   label: 'Death',
-                  value: 'death'
+                  key: 'death',
+                  value: '1'
                 }, {
                   label: 'Darkness',
-                  value: 'Darkness'
+                  key: 'Darkness',
+                  value: '1'
                 }, {
                   label: 'Curse',
-                  value: 'curse'
+                  key: 'curse',
+                  value: '1'
                 }, {
                   label: 'Cold',
-                  value: 'cold'
+                  key: 'cold',
+                  value: '1'
                 }, {
                   label: 'Chaotic',
-                  value: 'chaotic'
+                  key: 'chaotic',
+                  value: '1'
                 }, {
                   label: 'Air',
-                  value: 'air'
+                  key: 'air',
+                  value: '1'
                 }, {
                   label: 'Acid',
-                  value: 'acid'
+                  key: 'acid',
+                  value: '1'
                 },
               ]}
             />
 
             <CheckboxBank 
               title='Class'
-              name='spelllevel'
+              name='class'
               handleClick={props.handleClick}
               boxes = {[
                 {
                   label: 'Wizard',
-                  value: 'wiz'
+                  key: 'wiz',
+                  value: '0'
                 }, {
                   label: 'Sorcerer',
-                  value: 'sor'
+                  key: 'sor',
+                  value: '0'
                 }, {
                   label: 'Cleric',
-                  value: 'cleric'
+                  key: 'cleric',
+                  value: '0'
                 }, {
                   label: 'Druid',
-                  value: 'druid'
+                  key: 'druid',
+                  value: '0'
                 }, {
                   label: 'Ranger',
-                  value: 'ranger'
+                  key: 'ranger',
+                  value: '0'
                 }, {
                   label: 'Bard',
-                  value: 'bard'
+                  key: 'bard',
+                  value: '0'
                 }, {
                   label: 'Paladin',
-                  value: 'paladin'
+                  key: 'paladin',
+                  value: '0'
                 }, {
                   label: 'Alchemist',
-                  value: 'alchemist'
+                  key: 'alchemist',
+                  value: '0'
                 }, {
                   label: 'Summoner',
-                  value: 'summoner'
+                  key: 'summoner',
+                  value: '0'
                 }, {
                   label: 'Unchained Summoner',
-                  value: 'summonerunchained'
+                  key: 'summonerunchained',
+                  value: '0'
                 }, {
                   label: 'Inquisitor',
-                  value: 'inquisitor'
+                  key: 'inquisitor',
+                  value: '0'
                 }, {
                   label: 'Oracle',
-                  value: 'oracle'
+                  key: 'oracle',
+                  value: '0'
                 }, {
                   label: 'Antipaladin',
-                  value: 'antipaladin'
+                  key: 'antipaladin',
+                  value: '0'
                 }, {
                   label: 'Magus',
-                  value: 'magus'
+                  key: 'magus',
+                  value: '0'
                 }, {
                   label: 'Bloodrager',
-                  value: 'bloodrager'
+                  key: 'bloodrager',
+                  value: '0'
                 }, {
                   label: 'Shaman',
-                  value: 'shaman'
+                  key: 'shaman',
+                  value: '0'
                 }, {
                   label: 'Psychic',
-                  value: 'psychic'
+                  key: 'psychic',
+                  value: '0'
                 }, {
                   label: 'Medium',
-                  value: 'medium'
+                  key: 'medium',
+                  value: '0'
                 }, {
                   label: 'Mesmerist',
-                  value: 'mesmerist'
+                  key: 'mesmerist',
+                  value: '0'
                 }, {
                   label: 'Occultist',
-                  value: 'occultist'
+                  key: 'occultist',
+                  value: '0'
                 }, {
                   label: 'Spiritualist',
-                  value: 'spiritualist'
+                  key: 'spiritualist',
+                  value: '0'
                 }, {
                   label: 'Skald',
-                  value: 'skald'
+                  key: 'skald',
+                  value: '0'
                 }, {
                   label: 'Investigator',
-                  value: 'investigator'
+                  key: 'investigator',
+                  value: '0'
                 }, {
                   label: 'Hunter',
-                  value: 'hunter'
+                  key: 'hunter',
+                  value: '0'
                 }, {
                   label: 'Witch',
-                  value: 'witch'
+                  key: 'witch',
+                  value: '0'
                 }
               ]}
             />
