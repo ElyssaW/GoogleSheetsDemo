@@ -2,6 +2,7 @@ import SpellFull from './SpellFull'
 import SpellSlim from './SpellSlim'
 import SpellTrait from './SpellComponents/SpellTrait'
 import Toggle from '../Toggle'
+import { Box } from '@material-ui/core'
 
 function SpellList(props) {
 
@@ -11,20 +12,15 @@ function SpellList(props) {
                 < SpellFull spell={spell} key={`spell-${i}`} />
             }
             closed = {
-                <>
                 < SpellSlim spell={spell} key={`spell-${i}`} />
-                < SpellTrait trait={spell['short_description']} />
-                </>
             }
+            closeText='Close Spell' 
+            openText='Open Spell'
             />
     }) : []
 
     return (
       <div>
-          <h2>
-              Spell List
-          </h2>
-
           {spellList}
       </div>
     );

@@ -19,3 +19,8 @@ code {
 .radio-btn-label {
   display: inline-block;
 }
+
+.btn-full {
+  width: 100%;
+  font-size: 20px;
+}

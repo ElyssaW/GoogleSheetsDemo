@@ -3,7 +3,7 @@ import axios from 'axios';
 import Data from './Data'
 import React from 'react';
 import { useEffect, useState } from 'react'
-import { Typography, CssBaseline } from '@material-ui/core';
+import { Typography, CssBaseline, Box } from '@material-ui/core';
 
 import Pagination from './Components/Pagination'
 import SlimSearch from './Search/SlimSearch'
@@ -40,12 +40,18 @@ function App() {
   return (
     <>
       < CssBaseline />
-      <div className="App">
-        <Typography variant='h1' gutterBottom={true}>Pathfinder Spell Search</Typography>
 
+      <Box bgcolor="tomato" p={10} pt={4} boxShadow={2}>
+          <Typography  variant='h1'>Pathfinder Spell Search</Typography>
+          <Typography variant='h5'>A database of all first-party spells in Pathfinder</Typography>
+      </Box>
+
+      <div className="App">
         < Toggle 
           open={< AdvancedSearch updateSearch={updateSearch} setSpells={setData} spells={data} />}
           closed={< SlimSearch updateSearch={updateSearch} />}
+          openText='Open Advanced Search' 
+          closeText='Close Advanced Search'
         />
         
         < Pagination spells={filterSearch()} />

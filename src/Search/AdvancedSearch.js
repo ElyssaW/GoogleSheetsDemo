@@ -98,25 +98,25 @@ function AdvancedSearch(props) {
   }
 
   return (
-    <div>
+    <Box pt={1} pb={1}>
         <Typography variant='h3'>Advanced Search</Typography>
         
         < SearchBar updateSearch={updateSearch} />
 
-        <div className='row'>
-          <div>
+        <Box display='flex' flexDirection='row'>
+          <Box p={2}>
             <Typography variant='h5'>Include </Typography>
             <SearchOptions handleClick={(e)=>{updateInclude(e.target.dataset['key'], e.target.dataset['value'], e.target.name)}} />
-          </div>
+          </Box>
 
-          <div>
+          <Box p={2}>
             <Typography variant='h5'>Exclude </Typography>
             <SearchOptions handleClick={(e)=>{updateExclude(e.target.dataset['key'], e.target.dataset['value'], e.target.name)}} />
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        < Button handleClick={advancedSearch} text='Search' />
-    </div>
+        < Button handleClick={advancedSearch} text='Search' type='btn-full' />
+    </Box>
   );
 }
 

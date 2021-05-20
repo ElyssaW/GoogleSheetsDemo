@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from './Button'
+import { Box } from '@material-ui/core'
 
 function Toggle(props) {
 
@@ -12,19 +13,19 @@ function Toggle(props) {
     const display = expanded ? (
         <div>
             {props.open}
-            < Button text='Close' handleClick={toggle} />
+            < Button text={props.closeText} handleClick={toggle} />
         </div>
     ) : (
         <div>
             {props.closed}
-            < Button text='Open' handleClick={toggle} />
+            < Button text={props.openText} handleClick={toggle} />
         </div>
     )
 
     return (
-        <div >
+        <Box pb={1} pt={1} >
             {display}
-        </div>
+        </Box>
     )
 }
 

@@ -6,17 +6,17 @@ function PaginationNav(props) {
     for (let i = 1; i <= props.pageCount; i++) {
         let className = (props.index / props.resultsPerPage) + 1 === i ? 'breadcrumb-active' : 'breadcrumb'
         breadcrumbs.push(
-            < Button text={i} class={className} handleClick={()=>{props.setPage(i-1)}} />
+            < Button text={i} type={className} handleClick={()=>{props.setPage(i-1)}} />
         )
     }
 
     return (
       <>
-        < Button text="Previous" class='breadcrumb breadcrumb-back breadcrumb-end' handleClick={props.backPage} />
+        < Button text="Previous" type='breadcrumb breadcrumb-back breadcrumb-end' handleClick={props.backPage} />
 
         {breadcrumbs}
 
-        < Button text="Next" class='breadcrumb breadcrumb-next breadcrumb-end' handleClick={props.nextPage} />
+        < Button text="Next" type='breadcrumb breadcrumb-next breadcrumb-end' handleClick={props.nextPage} />
       </>
     );
   }

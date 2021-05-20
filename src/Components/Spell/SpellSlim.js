@@ -1,11 +1,12 @@
 import SpellHeader from './SpellComponents/SpellHeader'
+import { Box } from '@material-ui/core'
 
 function SpellSlim(props) {
 
   return (
-    <span>
+    <Box >
         < SpellHeader spell={props.spell} />
-    </span>
+    </Box>
   );
 }
 

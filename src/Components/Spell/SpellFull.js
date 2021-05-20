@@ -8,7 +8,7 @@ import SpellBody from './SpellComponents/SpellBody'
 function SpellFull(props) {
 
   return (
-    <Box>
+    <Box boxShadow={2} borderLeft={1} borderColor='tomato' p={4} m={2}>
         < SpellHeader spell={props.spell} />
         < SpellBody spell={props.spell} />
     </Box>
